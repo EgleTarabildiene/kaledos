@@ -1,0 +1,33 @@
+<div class="card mt-4">
+    <app-loading *ngIf="isLoading"></app-loading>
+
+
+    <div class="card-header">Dovanų sąrašas</div>
+    <div class="card-body">
+        <app-error *ngIf="isError" [message]="'Dovanų sąrašo užkrauti nepavyko'" (close)="closeError()"></app-error>
+        <table class="table" *ngIf="!isLoading && !isError">
+            <thead>
+                <tr>
+                    <th>Nr.</th>
+                    <th>Kam skirta</th>
+                    <th>Pavadinimas</th>
+                    <th>Statusas</th>
+                    <th class="table-veiksmai">Veiksmai</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let good of goods; let i=index">
+                    <td>{{ i+1 }}.</td>
+                    <td>{{ good.recipient }}</td>
+                    <td>{{ good.description }}</td>
+                    <td>{{ good.status }}</td>
+                    <td class="text-center">
+                        <a class="btn btn-success" [routerLink]="['/edit', good.id]">Redaguoti</a>
+                        &nbsp;&nbsp;
+                        <button class="btn btn-danger" (click)="deleteRecord(good.id)">Ištrinti</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

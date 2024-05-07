@@ -1,0 +1,27 @@
+<div class="card mt-4">
+    <div class="alert" *ngIf="isError">Ivyko klaida</div>
+    <app-loading *ngIf="isLoading"></app-loading>
+    <div class="card-header">
+        Pridėti naują kalėdinį pirkinį
+    </div>
+    <div class="card-body">
+        <app-error *ngIf="isError" [message]="'Prideti naujo iraso nepavyko'"></app-error>
+        <div class="mb-3">
+            <label for="" class="form-label">Kam skirta dovana</label>
+            <input type="text" name="" id="" class="form-control" [(ngModel)]="recipient">
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Dovanos aprašymas</label>
+            <input type="text" name="" id="" class="form-control" [(ngModel)]="description">
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">Statusas</label>
+            <select class="form-control" [(ngModel)]="status">
+                <option value="suplanuota">Suplanuota</option>
+                <option value="nupirkta">Nupirkta</option>
+                <option value="supakuota">Supakuota</option>
+            </select>
+        </div>
+        <button class="btn btn-primary" (click)="addGood()" [disabled]="recipient==null || description==null || status==null">Pridėti</button>
+    </div>
+</div>
