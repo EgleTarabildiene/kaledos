@@ -27,7 +27,9 @@
                         <button class="btn btn-danger" (click)="deleteRecord(good.id)">Ištrinti</button>
                     </td>
                 </tr>
+
             </tbody>
         </table>
+        <!--<app-item-of-goods *ngFor="let good of goods; let i=index" [good]="good" (onDeleteClick)="deleteRecord(good.id)"></app-item-of-goods>-->
     </div>
 </div>

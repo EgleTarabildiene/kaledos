@@ -19,7 +19,7 @@ public onStatusChange=new EventEmitter<Number>();
 
   public addGood(item:Good){
     this.goods.push(item);
-   return  this.http.post("https://kaledos-71115-default-rtdb.europe-west1.firebasedatabase.app/goods.json?auth="+this.authService.auth?.idToken,item).pipe(
+   return  this.http.post("https://kaledos-71115-default-rtdb.europe-west1.firebasedatabase.app/goods.json" ,item).pipe(
     tap(()=>this.onGoodsCountChange.emit())
    );
   }
@@ -27,7 +27,7 @@ public onStatusChange=new EventEmitter<Number>();
   public loadData(){
     // Gauname observable
     return this.http
-     .get<{[key:string]:Good}>("https://kaledos-71115-default-rtdb.europe-west1.firebasedatabase.app/goods.json?auth="+this.authService.auth?.idToken)
+     .get<{[key:string]:Good}>("https://kaledos-71115-default-rtdb.europe-west1.firebasedatabase.app/goods.json")
       .pipe( 
           map( (data):Good[]=>{
             let goods=[];
@@ -64,17 +64,17 @@ public onStatusChange=new EventEmitter<Number>();
 
 
 public loadRecord(id:String){
-  return this.http.get<Good>("https://kaledos-71115-default-rtdb.europe-west1.firebasedatabase.app/goods"+id+".json?auth="+this.authService.auth?.idToken);
+  return this.http.get<Good>("https://kaledos-71115-default-rtdb.europe-west1.firebasedatabase.app/goods"+id+".json");
 
 }
 
 public updateRecord(item:Good){
-  return this.http.patch("https://kaledos-71115-default-rtdb.europe-west1.firebasedatabase.app/goods"+item.id+".json?auth="+this.authService.auth?.idToken,item);
+  return this.http.patch("https://kaledos-71115-default-rtdb.europe-west1.firebasedatabase.app/goods"+item.id+".json" ,item);
 }
 
 
 public deleteRecord(id:string){
-  return this.http.delete("https://kaledos-71115-default-rtdb.europe-west1.firebasedatabase.app/goods"+id+".json?auth="+this.authService.auth?.idToken).pipe(
+  return this.http.delete("https://kaledos-71115-default-rtdb.europe-west1.firebasedatabase.app/goods"+id+".json").pipe(
     tap(()=>this.onGoodsCountChange.emit())
 );
 }

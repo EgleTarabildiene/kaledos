@@ -16,7 +16,7 @@ export class AuthService {
   constructor(private http:HttpClient, private router:Router) { 
 
   }
-
+// Prisijungimas kai prisijungime ivede slaptazodi
   public register(email:string, password:string, newUser:boolean){
     const method=(newUser)?'signUp':'signInWithPassword';
 
@@ -27,13 +27,32 @@ export class AuthService {
     }).pipe(tap( (response)=>{
       this.auth=response;
       this.isLoggedin=true;
+      //Issaugome duomenis prisijungimo
+      localStorage.setItem("user", JSON.stringify(this.auth));
       this.onUserStatusChange.emit(true);
     }));
   }
 
+
+
+
+ 
+  public autoLogin(){
+   let user=localStorage.getItem("user");
+   //Patikriname ar esame prisijunge
+   if(user!=null){
+    JSON.parse(user);
+    this.isLoggedin=true;
+    this.onUserStatusChange.emit(true);
+   }
+  }
+
+  //Asijungiame paspaude mygtuka atsijungti
   public logout(){
     this.isLoggedin=false;
     this.auth=null;
+    //Issitriname prisijungimo duomenis
+    localStorage.removeItem("user")
     this.onUserStatusChange.emit(false);
     this.router.navigate(['/']);
   }

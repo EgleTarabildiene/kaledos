@@ -6,11 +6,12 @@ import { RouterLink } from '@angular/router';
 import { LoadingComponent } from '../loading/loading.component';
 import { ErrorComponent } from '../error/error.component';
 import { AuthService } from '../../services/auth.service';
+import { ItemOfGoodsComponent } from '../item-of-goods/item-of-goods.component';
 
 @Component({
   selector: 'app-list-of-goods',
   standalone: true,
-  imports: [CommonModule, RouterLink, LoadingComponent, ErrorComponent],
+  imports: [CommonModule, RouterLink, LoadingComponent, ErrorComponent, ItemOfGoodsComponent],
   templateUrl: './list-of-goods.component.html',
   styleUrl: './list-of-goods.component.css'
 })
